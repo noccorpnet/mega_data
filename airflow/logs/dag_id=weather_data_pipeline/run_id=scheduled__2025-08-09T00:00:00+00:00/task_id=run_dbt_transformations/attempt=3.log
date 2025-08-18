@@ -1,0 +1,89 @@
+[2025-08-10T16:37:57.124+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-10T16:37:57.251+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.run_dbt_transformations scheduled__2025-08-09T00:00:00+00:00 [queued]>
+[2025-08-10T16:37:57.257+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.run_dbt_transformations scheduled__2025-08-09T00:00:00+00:00 [queued]>
+[2025-08-10T16:37:57.257+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 4
+[2025-08-10T16:37:57.264+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_dbt_transformations> on 2025-08-09 00:00:00+00:00
+[2025-08-10T16:37:57.272+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'run_dbt_transformations', 'scheduled__2025-08-09T00:00:00+00:00', '--job-id', '20', '--raw', '--subdir', 'DAGS_FOLDER/weather_dags.py', '--cfg-path', '/tmp/tmpw4m8s0jm']
+[2025-08-10T16:37:57.274+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=198) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-08-10T16:37:57.274+0000] {standard_task_runner.py:91} INFO - Job 20: Subtask run_dbt_transformations
+[2025-08-10T16:37:57.274+0000] {standard_task_runner.py:63} INFO - Started process 200 to run task
+[2025-08-10T16:37:57.319+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_data_pipeline.run_dbt_transformations scheduled__2025-08-09T00:00:00+00:00 [running]> on host 49775de909c4
+[2025-08-10T16:37:57.391+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Hendi Irwanto' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='run_dbt_transformations' AIRFLOW_CTX_EXECUTION_DATE='2025-08-09T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-09T00:00:00+00:00'
+[2025-08-10T16:37:57.392+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-10T16:37:57.412+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-10T16:37:57.412+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'dbt run --profiles-dir /opt/data-engineer/weather-project/dbt/weather_dbt']
+[2025-08-10T16:37:57.421+0000] {subprocess.py:86} INFO - Output:
+[2025-08-10T16:37:58.745+0000] {subprocess.py:93} INFO - [0m16:37:58  Running with dbt=1.10.7
+[2025-08-10T16:37:58.746+0000] {subprocess.py:93} INFO - [0m16:37:58  Encountered an error:
+[2025-08-10T16:37:58.746+0000] {subprocess.py:93} INFO - Runtime Error
+[2025-08-10T16:37:58.747+0000] {subprocess.py:93} INFO -   No dbt_project.yml found at expected path /tmp/***tmpl_8aqcn3/dbt_project.yml
+[2025-08-10T16:37:58.747+0000] {subprocess.py:93} INFO -   Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+[2025-08-10T16:37:58.747+0000] {subprocess.py:93} INFO - 
+[2025-08-10T16:38:00.192+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-08-10T16:38:00.193+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-10T16:38:00.203+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-08-10T16:38:00.206+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=weather_data_pipeline, task_id=run_dbt_transformations, run_id=scheduled__2025-08-09T00:00:00+00:00, execution_date=20250809T000000, start_date=20250810T163757, end_date=20250810T163800
+[2025-08-10T16:38:00.214+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 20 for task run_dbt_transformations (Bash command failed. The command returned a non-zero exit code 2.; 200)
+[2025-08-10T16:38:00.224+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-10T16:38:00.242+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-10T16:38:00.243+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-10T16:45:44.547+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-10T16:45:44.673+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.run_dbt_transformations scheduled__2025-08-09T00:00:00+00:00 [queued]>
+[2025-08-10T16:45:44.678+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.run_dbt_transformations scheduled__2025-08-09T00:00:00+00:00 [queued]>
+[2025-08-10T16:45:44.678+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 4
+[2025-08-10T16:45:44.686+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_dbt_transformations> on 2025-08-09 00:00:00+00:00
+[2025-08-10T16:45:44.693+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'run_dbt_transformations', 'scheduled__2025-08-09T00:00:00+00:00', '--job-id', '28', '--raw', '--subdir', 'DAGS_FOLDER/weather_dags.py', '--cfg-path', '/tmp/tmpqpnb2agq']
+[2025-08-10T16:45:44.695+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=427) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-08-10T16:45:44.695+0000] {standard_task_runner.py:91} INFO - Job 28: Subtask run_dbt_transformations
+[2025-08-10T16:45:44.695+0000] {standard_task_runner.py:63} INFO - Started process 429 to run task
+[2025-08-10T16:45:44.741+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_data_pipeline.run_dbt_transformations scheduled__2025-08-09T00:00:00+00:00 [running]> on host 49775de909c4
+[2025-08-10T16:45:44.813+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Hendi Irwanto' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='run_dbt_transformations' AIRFLOW_CTX_EXECUTION_DATE='2025-08-09T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-09T00:00:00+00:00'
+[2025-08-10T16:45:44.814+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-10T16:45:44.823+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-10T16:45:44.823+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'dbt run --project-dir /opt/data-engineer/weather-project/dbt/weather_dbt --profiles-dir /opt/data-engineer/weather-project/dbt/weather_dbt/.dbt']
+[2025-08-10T16:45:44.832+0000] {subprocess.py:86} INFO - Output:
+[2025-08-10T16:45:46.163+0000] {subprocess.py:93} INFO - [0m16:45:46  Running with dbt=1.10.7
+[2025-08-10T16:45:46.427+0000] {subprocess.py:93} INFO - [0m16:45:46  Registered adapter: postgres=1.9.0
+[2025-08-10T16:45:46.613+0000] {subprocess.py:93} INFO - [0m16:45:46  Unable to do partial parsing because of a version mismatch
+[2025-08-10T16:45:48.102+0000] {subprocess.py:93} INFO - [0m16:45:48  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+[2025-08-10T16:45:48.103+0000] {subprocess.py:93} INFO - There are 1 unused configuration paths:
+[2025-08-10T16:45:48.103+0000] {subprocess.py:93} INFO - - models.dbt_date
+[2025-08-10T16:45:48.224+0000] {subprocess.py:93} INFO - [0m16:45:48  Found 5 models, 2 sources, 576 macros
+[2025-08-10T16:45:48.226+0000] {subprocess.py:93} INFO - [0m16:45:48
+[2025-08-10T16:45:48.226+0000] {subprocess.py:93} INFO - [0m16:45:48  Concurrency: 1 threads (target='dev')
+[2025-08-10T16:45:48.227+0000] {subprocess.py:93} INFO - [0m16:45:48
+[2025-08-10T16:45:48.369+0000] {subprocess.py:93} INFO - [0m16:45:48  1 of 5 START sql table model dimension.dim_dates ............................... [RUN]
+[2025-08-10T16:45:48.510+0000] {subprocess.py:93} INFO - [0m16:45:48  1 of 5 OK created sql table model dimension.dim_dates .......................... [[32mSELECT 1829[0m in 0.14s]
+[2025-08-10T16:45:48.512+0000] {subprocess.py:93} INFO - [0m16:45:48  2 of 5 START sql table model dimension.dim_locations ........................... [RUN]
+[2025-08-10T16:45:48.545+0000] {subprocess.py:93} INFO - [0m16:45:48  2 of 5 OK created sql table model dimension.dim_locations ...................... [[32mSELECT 100[0m in 0.03s]
+[2025-08-10T16:45:48.546+0000] {subprocess.py:93} INFO - [0m16:45:48  3 of 5 START sql view model staging.stg_weather_data ........................... [RUN]
+[2025-08-10T16:45:48.642+0000] {subprocess.py:93} INFO - [0m16:45:48  3 of 5 OK created sql view model staging.stg_weather_data ...................... [[32mCREATE VIEW[0m in 0.09s]
+[2025-08-10T16:45:48.644+0000] {subprocess.py:93} INFO - [0m16:45:48  4 of 5 START sql table model marts.mart_avg_temp_by_day_of_week ................ [RUN]
+[2025-08-10T16:45:48.681+0000] {subprocess.py:93} INFO - [0m16:45:48  4 of 5 OK created sql table model marts.mart_avg_temp_by_day_of_week ........... [[32mSELECT 700[0m in 0.04s]
+[2025-08-10T16:45:48.682+0000] {subprocess.py:93} INFO - [0m16:45:48  5 of 5 START sql table model marts.mart_daily_weather .......................... [RUN]
+[2025-08-10T16:45:48.720+0000] {subprocess.py:93} INFO - [0m16:45:48  5 of 5 OK created sql table model marts.mart_daily_weather ..................... [[32mSELECT 900[0m in 0.04s]
+[2025-08-10T16:45:48.732+0000] {subprocess.py:93} INFO - [0m16:45:48
+[2025-08-10T16:45:48.732+0000] {subprocess.py:93} INFO - [0m16:45:48  Finished running 4 table models, 1 view model in 0 hours 0 minutes and 0.50 seconds (0.50s).
+[2025-08-10T16:45:48.767+0000] {subprocess.py:93} INFO - [0m16:45:48
+[2025-08-10T16:45:48.768+0000] {subprocess.py:93} INFO - [0m16:45:48  [32mCompleted successfully[0m
+[2025-08-10T16:45:48.768+0000] {subprocess.py:93} INFO - [0m16:45:48
+[2025-08-10T16:45:48.769+0000] {subprocess.py:93} INFO - [0m16:45:48  Done. PASS=5 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=5
+[2025-08-10T16:45:50.269+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-10T16:45:50.269+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-10T16:45:50.292+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_data_pipeline, task_id=run_dbt_transformations, run_id=scheduled__2025-08-09T00:00:00+00:00, execution_date=20250809T000000, start_date=20250810T164544, end_date=20250810T164550
+[2025-08-10T16:45:50.324+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-10T16:45:50.338+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-10T16:45:50.339+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

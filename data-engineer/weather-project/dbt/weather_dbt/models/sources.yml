@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: weather_dbt
+    database: dwh_mega
+    schema: raw
+    tables:
+      - name: weather_data
+        description: "Data cuaca mentah harian yang di-ingest dari API OPEN Meteo."
+        columns:
+          - name: time
+            description: "Tanggal pencatatan data cuaca."
+          - name: name
+            description: "Nama kota lokasi cuaca."
+          - name: temperature_2m_max
+            description: "Suhu maksimum dalam derajat Celsius."
+          - name: temperature_2m_min
+            description: "Suhu minimum dalam derajat Celsius."
+          - name: precipitation_sum
+            description: "Total curah hujan dalam milimeter."
+          - name: weather_code
+            description: "Kode cuaca yang mengindikasikan kondisi cuaca (misalnya, cerah, hujan, salju)."
+  
+  - name : geolocation_dbt
+    database: dwh_mega
+    schema: raw
+    tables:
+      - name: geolocation
+        description: "Data geolokasi kota-kota di Indonesia."
+        columns:
+          - name: adminName1
+            description: "Nama provinsi dari kota."
+          

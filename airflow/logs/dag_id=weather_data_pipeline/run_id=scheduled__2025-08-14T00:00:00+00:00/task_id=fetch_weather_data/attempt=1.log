@@ -1,0 +1,43 @@
+[2025-08-18T00:56:48.369+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-18T00:56:48.419+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2025-08-14T00:00:00+00:00 [queued]>
+[2025-08-18T00:56:48.429+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2025-08-14T00:00:00+00:00 [queued]>
+[2025-08-18T00:56:48.429+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-18T00:56:48.444+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): fetch_weather_data> on 2025-08-14 00:00:00+00:00
+[2025-08-18T00:56:48.466+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'fetch_weather_data', 'scheduled__2025-08-14T00:00:00+00:00', '--job-id', '51', '--raw', '--subdir', 'DAGS_FOLDER/weather_dags.py', '--cfg-path', '/tmp/tmp9141ubnu']
+[2025-08-18T00:56:48.483+0000] {standard_task_runner.py:91} INFO - Job 51: Subtask fetch_weather_data
+[2025-08-18T00:56:48.480+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=190) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-08-18T00:56:48.486+0000] {standard_task_runner.py:63} INFO - Started process 194 to run task
+[2025-08-18T00:56:48.596+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2025-08-14T00:00:00+00:00 [running]> on host 49775de909c4
+[2025-08-18T00:56:48.733+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Hendi Irwanto' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2025-08-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-14T00:00:00+00:00'
+[2025-08-18T00:56:48.735+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-18T00:56:48.752+0000] {logging_mixin.py:188} INFO - Error fetching geolocation data: (psycopg2.OperationalError) connection to server at "172.18.0.2", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2025-08-18T00:56:48.752+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-18T00:56:48.753+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/data-engineer/weather-project/scripts/weather_data.py", line 82, in main
+    for index, data_geo in geolocation_df.iterrows():
+                           ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'iterrows'
+[2025-08-18T00:56:48.774+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=weather_data_pipeline, task_id=fetch_weather_data, run_id=scheduled__2025-08-14T00:00:00+00:00, execution_date=20250814T000000, start_date=20250818T005648, end_date=20250818T005648
+[2025-08-18T00:56:48.792+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 51 for task fetch_weather_data ('NoneType' object has no attribute 'iterrows'; 194)
+[2025-08-18T00:56:48.831+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-18T00:56:48.864+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-18T00:56:48.865+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

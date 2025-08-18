@@ -1,0 +1,46 @@
+[2025-08-13T00:01:20.370+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-13T00:01:20.502+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.run_dbt_transformations scheduled__2025-08-12T00:00:00+00:00 [queued]>
+[2025-08-13T00:01:20.507+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.run_dbt_transformations scheduled__2025-08-12T00:00:00+00:00 [queued]>
+[2025-08-13T00:01:20.508+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-13T00:01:20.515+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_dbt_transformations> on 2025-08-12 00:00:00+00:00
+[2025-08-13T00:01:20.523+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'run_dbt_transformations', 'scheduled__2025-08-12T00:00:00+00:00', '--job-id', '43', '--raw', '--subdir', 'DAGS_FOLDER/weather_dags.py', '--cfg-path', '/tmp/tmp1sk88r4o']
+[2025-08-13T00:01:20.525+0000] {standard_task_runner.py:91} INFO - Job 43: Subtask run_dbt_transformations
+[2025-08-13T00:01:20.525+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=79233) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-08-13T00:01:20.526+0000] {standard_task_runner.py:63} INFO - Started process 79235 to run task
+[2025-08-13T00:01:20.570+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_data_pipeline.run_dbt_transformations scheduled__2025-08-12T00:00:00+00:00 [running]> on host 49775de909c4
+[2025-08-13T00:01:20.646+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Hendi Irwanto' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='run_dbt_transformations' AIRFLOW_CTX_EXECUTION_DATE='2025-08-12T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-12T00:00:00+00:00'
+[2025-08-13T00:01:20.647+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-13T00:01:20.656+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-13T00:01:20.656+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'dbt run --project-dir /opt/data-engineer/weather-project/dbt/weather_dbt --profiles-dir /opt/data-engineer/weather-project/dbt/weather_dbt/.dbt']
+[2025-08-13T00:01:20.666+0000] {subprocess.py:86} INFO - Output:
+[2025-08-13T00:01:22.154+0000] {subprocess.py:93} INFO - [0m00:01:22  Running with dbt=1.10.7
+[2025-08-13T00:01:22.431+0000] {subprocess.py:93} INFO - [0m00:01:22  Registered adapter: postgres=1.9.0
+[2025-08-13T00:01:22.654+0000] {subprocess.py:93} INFO - [0m00:01:22  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+[2025-08-13T00:01:22.654+0000] {subprocess.py:93} INFO - There are 1 unused configuration paths:
+[2025-08-13T00:01:22.655+0000] {subprocess.py:93} INFO - - models.dbt_date
+[2025-08-13T00:01:22.783+0000] {subprocess.py:93} INFO - [0m00:01:22  Found 5 models, 2 sources, 576 macros
+[2025-08-13T00:01:22.785+0000] {subprocess.py:93} INFO - [0m00:01:22
+[2025-08-13T00:01:22.786+0000] {subprocess.py:93} INFO - [0m00:01:22  Concurrency: 1 threads (target='dev')
+[2025-08-13T00:01:22.786+0000] {subprocess.py:93} INFO - [0m00:01:22
+[2025-08-13T00:01:22.931+0000] {subprocess.py:93} INFO - [0m00:01:22  1 of 5 START sql table model dimension.dim_dates ............................... [RUN]
+[2025-08-13T00:01:23.146+0000] {subprocess.py:93} INFO - [0m00:01:23  1 of 5 OK created sql table model dimension.dim_dates .......................... [[32mSELECT 1832[0m in 0.21s]
+[2025-08-13T00:01:23.148+0000] {subprocess.py:93} INFO - [0m00:01:23  2 of 5 START sql table model dimension.dim_locations ........................... [RUN]
+[2025-08-13T00:01:23.181+0000] {subprocess.py:93} INFO - [0m00:01:23  2 of 5 OK created sql table model dimension.dim_locations ...................... [[32mSELECT 100[0m in 0.03s]
+[2025-08-13T00:01:23.182+0000] {subprocess.py:93} INFO - [0m00:01:23  3 of 5 START sql view model staging.stg_weather_data ........................... [RUN]
+[2025-08-13T00:01:23.276+0000] {subprocess.py:93} INFO - [0m00:01:23  3 of 5 OK created sql view model staging.stg_weather_data ...................... [[32mCREATE VIEW[0m in 0.09s]
+[2025-08-13T00:01:23.278+0000] {subprocess.py:93} INFO - [0m00:01:23  4 of 5 START sql table model marts.mart_avg_temp_by_day_of_week ................ [RUN]
+[2025-08-13T00:01:23.316+0000] {subprocess.py:93} INFO - [0m00:01:23  4 of 5 OK created sql table model marts.mart_avg_temp_by_day_of_week ........... [[32mSELECT 700[0m in 0.04s]
+[2025-08-13T00:01:23.318+0000] {subprocess.py:93} INFO - [0m00:01:23  5 of 5 START sql table model marts.mart_daily_weather .......................... [RUN]
+[2025-08-13T00:01:23.356+0000] {subprocess.py:93} INFO - [0m00:01:23  5 of 5 OK created sql table model marts.mart_daily_weather ..................... [[32mSELECT 1200[0m in 0.04s]
+[2025-08-13T00:01:23.370+0000] {subprocess.py:93} INFO - [0m00:01:23
+[2025-08-13T00:01:23.370+0000] {subprocess.py:93} INFO - [0m00:01:23  Finished running 4 table models, 1 view model in 0 hours 0 minutes and 0.58 seconds (0.58s).
+[2025-08-13T00:01:23.403+0000] {subprocess.py:93} INFO - [0m00:01:23
+[2025-08-13T00:01:23.404+0000] {subprocess.py:93} INFO - [0m00:01:23  [32mCompleted successfully[0m
+[2025-08-13T00:01:23.404+0000] {subprocess.py:93} INFO - [0m00:01:23
+[2025-08-13T00:01:23.404+0000] {subprocess.py:93} INFO - [0m00:01:23  Done. PASS=5 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=5
+[2025-08-13T00:01:24.947+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-13T00:01:24.947+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-13T00:01:24.972+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_data_pipeline, task_id=run_dbt_transformations, run_id=scheduled__2025-08-12T00:00:00+00:00, execution_date=20250812T000000, start_date=20250813T000120, end_date=20250813T000124
+[2025-08-13T00:01:24.998+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-13T00:01:25.014+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-13T00:01:25.015+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
